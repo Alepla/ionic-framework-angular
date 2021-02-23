@@ -12,6 +12,8 @@ export class FilmsPage implements OnInit {
   constructor(private filmsService: FilmsService) {}
 
   ngOnInit() {
-    this.films = this.filmsService.getFilms();
+    this.filmsService.getFilms().subscribe((data) => {
+      this.films = data.d;
+    });
   }
 }

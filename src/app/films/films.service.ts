@@ -1,36 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Film } from './film.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FilmsService {
-  private films: Film[] = [
-    {
-      Title: 'Aa Naluguru',
-      Year: '2004',
-      Runtime: '141 min',
-      Genre: 'Drama',
-      Director: 'Chandra Siddhartha',
-      Actors: 'Rajendra Prasad, Aamani, Raja, Raghu Babu',
-      Plot:
-        'A man fights for his philosophy: that human relations are more important than money.',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BNGZjNDBhNGQtM2M4Ny00ZTVhLTk4ZWMtNDMyNzQ2Mjk0ZGJhXkEyXkFqcGdeQXVyNjQ1MDcxNzM@._V1_SX300.jpg',
-    },
-  ];
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
+  headers = new HttpHeaders({
+    'x-rapidapi-key': 'CvOoC3EqJHmshInI0IhO2fJ5iARvp1BlJaCjsnbTT4uD0IYHXI',
+    'x-rapidapi-host': 'imdb8.p.rapidapi.com',
+  });
 
-  getFilms(): Film[] {
-    return [...this.films];
+  getFilms() {
+    return this.http.get<any>(
+      'https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr',
+      { headers: this.headers }
+    );
   }
 
-  getFilm(Title: string) {
-    return {
-      ...this.films.find((film) => {
-        return film.Title === Title;
-      }),
-    };
+  getFilm(filmId: string) {
+    return this.http.get<any>(
+      'https://imdb8.p.rapidapi.com/auto-complete?id=' + filmId,
+      { headers: this.headers }
+    );
   }
 }

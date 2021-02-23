@@ -1,10 +1,10 @@
 export interface Film {
-  Title: string;
-  Year: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Actors: string;
-  Plot: string;
-  Poster: string;
+  l: string;
+  id: string;
+  q: string;
+  s: string;
+  vt: string;
+  y: string;
+  yr: string;
+  i: any;
 }
