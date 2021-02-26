@@ -7,13 +7,19 @@ import { FilmsService } from './films.service';
   styleUrls: ['./films.page.scss'],
 })
 export class FilmsPage implements OnInit {
-  films = [];
+  public searchTerm: string = '';
+  public films = [];
 
   constructor(private filmsService: FilmsService) {}
 
-  ngOnInit() {
-    this.filmsService.getFilms().subscribe((data) => {
-      this.films = data.d;
-    });
+  ngOnInit() {}
+
+  setFilteredItems() {
+    console.log(this.searchTerm);
+    this.searchTerm !== ''
+      ? this.filmsService.getFilms(this.searchTerm).subscribe((data) => {
+          this.films = data.d;
+        })
+      : (this.films = []);
   }
 }

@@ -18,9 +18,10 @@ export class FilmDetailsPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((paramMap) => {
-      const recipeId = paramMap.get('filmId');
-      this.filmsService.getFilm(recipeId);
-      console.log(this.filmsService.getFilm(recipeId));
+      const recipeId = paramMap.get('id');
+      this.filmsService.getFilm(recipeId).subscribe((data) => {
+        console.log(data);
+      });
     });
   }
 }

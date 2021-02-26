@@ -4,7 +4,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionChange)="setFilteredItems()"
+  ></ion-searchbar>
+
   <ion-list>
     <div *ngFor="let film of films" [routerLink]="['/films', film.id]">
       <ion-avatar>

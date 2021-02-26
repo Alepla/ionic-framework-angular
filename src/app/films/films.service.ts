@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class FilmsService {
+  public films: any = [];
   constructor(private http: HttpClient) {}
 
   headers = new HttpHeaders({
@@ -12,17 +13,19 @@ export class FilmsService {
     'x-rapidapi-host': 'imdb8.p.rapidapi.com',
   });
 
-  getFilms() {
+  getFilms(searchTerm) {
     return this.http.get<any>(
-      'https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr',
+      'https://imdb8.p.rapidapi.com/auto-complete?q=' + searchTerm,
       { headers: this.headers }
     );
   }
 
   getFilm(filmId: string) {
-    return this.http.get<any>(
-      'https://imdb8.p.rapidapi.com/auto-complete?id=' + filmId,
-      { headers: this.headers }
+    return this.http.get(
+      'https://imdb8.p.rapidapi.com/title/get-top-cast?tconst=' + filmId,
+      {
+        headers: this.headers,
+      }
     );
   }
 }
