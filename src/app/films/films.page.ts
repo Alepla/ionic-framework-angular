@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from './films.service';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-films',
@@ -7,19 +9,35 @@ import { FilmsService } from './films.service';
   styleUrls: ['./films.page.scss'],
 })
 export class FilmsPage implements OnInit {
-  public searchTerm: string = '';
+  public searchControl: FormControl;
   public films = [];
+  public searching: any = false;
 
-  constructor(private filmsService: FilmsService) {}
+  constructor(private filmsService: FilmsService) {
+    this.searchControl = new FormControl();
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setFilteredItems('');
 
-  setFilteredItems() {
-    console.log(this.searchTerm);
-    this.searchTerm !== ''
-      ? this.filmsService.getFilms(this.searchTerm).subscribe((data) => {
-          this.films = data.d;
-        })
-      : (this.films = []);
+    this.searchControl.valueChanges
+      .pipe(debounceTime(700))
+      .subscribe((search) => {
+        this.setFilteredItems(search);
+      });
+  }
+
+  setFilteredItems(searchTerm) {
+    this.searching = true;
+
+    if (searchTerm !== '') {
+      this.filmsService.getFilms(searchTerm).subscribe((data) => {
+        this.searching = false;
+        this.films = data.d;
+      });
+    } else {
+      this.searching = false;
+      this.films = [];
+    }
   }
 }
