@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 };
 
-export const APIKEY = 'CvOoC3EqJHmshInI0IhO2fJ5iARvp1BlJaCjsnbTT4uD0IYHXI';
+export const APIKEY = '7c4f0664e2b0d70cc9834cbfd8b7d7d6';
 
 /*
  * For easier debugging in development mode, you can import the following file

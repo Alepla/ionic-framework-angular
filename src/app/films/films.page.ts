@@ -33,7 +33,7 @@ export class FilmsPage implements OnInit {
     if (searchTerm !== '') {
       this.filmsService.getFilms(searchTerm).subscribe((data) => {
         this.searching = false;
-        this.films = data.d;
+        this.films = data.results;
       });
     } else {
       this.searching = false;

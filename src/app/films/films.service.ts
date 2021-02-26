@@ -14,20 +14,18 @@ export class FilmsService {
     'x-rapidapi-host': 'imdb8.p.rapidapi.com',
   });
 
-  getFilms(searchTerm) {
-    console.log();
+  getFilms(searchTerm: string) {
     return this.http.get<any>(
-      'https://imdb8.p.rapidapi.com/auto-complete?q=' + searchTerm,
-      { headers: this.headers }
+      'https://api.themoviedb.org/3/search/movie?api_key=' +
+        APIKEY +
+        '&query=' +
+        searchTerm
     );
   }
 
   getFilm(filmId: string) {
     return this.http.get(
-      'https://imdb8.p.rapidapi.com/title/get-top-cast?tconst=' + filmId,
-      {
-        headers: this.headers,
-      }
+      'https://api.themoviedb.org/3/movie/' + filmId + '?api_key=' + APIKEY
     );
   }
 }

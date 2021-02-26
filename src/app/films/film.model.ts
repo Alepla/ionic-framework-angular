@@ -1,10 +1,7 @@
 export interface Film {
-  l: string;
+  title: string;
   id: string;
-  q: string;
-  s: string;
-  vt: string;
-  y: string;
-  yr: string;
-  i: any;
+  overview: string;
+  poster_path: string;
+  release_date: string;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Film } from '../film.model';
+//import { Film } from '../film.model';
 import { FilmsService } from '../films.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { FilmsService } from '../films.service';
   styleUrls: ['./film-details.page.scss'],
 })
 export class FilmDetailsPage implements OnInit {
-  film: Film;
+  //film: Film;
+  film: {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -20,7 +21,8 @@ export class FilmDetailsPage implements OnInit {
     this.activatedRoute.paramMap.subscribe((paramMap) => {
       const recipeId = paramMap.get('id');
       this.filmsService.getFilm(recipeId).subscribe((data) => {
-        console.log(data);
+        //console.log(data);
+        this.film = data;
       });
     });
   }
