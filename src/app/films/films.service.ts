@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { APIKEY } from '../../environments/environment';
+import { Film } from './film.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +9,6 @@ import { APIKEY } from '../../environments/environment';
 export class FilmsService {
   public films: any = [];
   constructor(private http: HttpClient) {}
-
-  headers = new HttpHeaders({
-    'x-rapidapi-key': APIKEY,
-    'x-rapidapi-host': 'imdb8.p.rapidapi.com',
-  });
 
   getFilms(searchTerm: string) {
     return this.http.get<any>(
@@ -24,7 +20,7 @@ export class FilmsService {
   }
 
   getFilm(filmId: string) {
-    return this.http.get(
+    return this.http.get<Film>(
       'https://api.themoviedb.org/3/movie/' + filmId + '?api_key=' + APIKEY
     );
   }

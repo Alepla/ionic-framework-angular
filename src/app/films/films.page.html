@@ -2,20 +2,21 @@
   <ion-toolbar color="danger">
     <ion-title>Films</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [formControl]="searchControl"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-searchbar [formControl]="searchControl"></ion-searchbar>
-
+<ion-content fullscreen>
   <div *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
 
   <ion-list>
     <div *ngFor="let film of films" [routerLink]="['/films', film.id]">
-      <ion-label>
+      <ion-item>
         {{film.title}}
-      </ion-label>
+      </ion-item>
     </div>
   </ion-list>
 </ion-content>
