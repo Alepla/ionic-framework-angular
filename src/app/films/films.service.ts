@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { APIKEY } from '../../environments/environment';
-import { Film } from './film.model';
+import { filmDB } from './film.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class FilmsService {
   }
 
   getFilm(filmId: string) {
-    return this.http.get<Film>(
+    return this.http.get<filmDB>(
       'https://api.themoviedb.org/3/movie/' + filmId + '?api_key=' + APIKEY
     );
   }
