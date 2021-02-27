@@ -8,18 +8,38 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h1 class="ion-text-center">{{film?.title}}</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <div class="ion-text-center">
-          {{film?.overview}}
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
+  <div *ngIf="isDataAvailable">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img alt="{{film.poster_path}}" src="https://image.tmdb.org/t/p/w500{{film.poster_path}}" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h3 class="ion-text-center">{{film.tagline}}</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-chip>
+            <ion-label>{{film.release_date}}</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-label>{{film.original_language}}</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            {{film.overview}}
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

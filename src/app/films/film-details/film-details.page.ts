@@ -9,18 +9,23 @@ import { FilmsService } from '../films.service';
   styleUrls: ['./film-details.page.scss'],
 })
 export class FilmDetailsPage implements OnInit {
-  film: filmDB;
+  public film: filmDB;
+  public searching: any = false;
+  isDataAvailable: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private filmsService: FilmsService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.searching = true;
     this.activatedRoute.paramMap.subscribe((paramMap) => {
       const recipeId = paramMap.get('id');
       this.filmsService.getFilm(recipeId).subscribe((data) => {
         this.film = data;
+        this.searching = false;
+        this.isDataAvailable = true;
       });
     });
   }
